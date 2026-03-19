@@ -1,33 +1,186 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Unser Gemüsegarten</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein Gemüsegarten</title>
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #2E7D32;
+            --earth-brown: #6D4C41;
+            --bg-color: #f9fbe7;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        h1 { color: var(--dark-green); }
+
+        /* Beet-Layout */
+        .garden-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .beet-card {
+            background: var(--card-bg);
+            border: 2px solid var(--earth-brown);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .beet-header {
+            background: var(--earth-brown);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .beet-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Unterteilung in Felder */
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .plot {
+            background: #efebe9;
+            border: 1px dashed var(--earth-brown);
+            padding: 15px 5px;
+            text-align: center;
+            font-size: 0.9em;
+            border-radius: 4px;
+        }
+
+        /* Ernteliste */
+        .harvest-list {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            border-bottom: 2px solid var(--primary-green);
+            padding: 10px;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status-ready { color: var(--primary-green); font-weight: bold; }
+        .status-wait { color: #ffa000; }
+        .status-none { color: #ccc; }
+
+        @media (max-width: 600px) {
+            .garden-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>🌿 Unser Gemüsegarten</h1>
-    <p>Übersicht unserer Beete & aktuelle Ernte</p>
-  </header>
+<header>
+    <h1>🌿 Mein Gemüsegarten</h1>
+    <p>Übersicht & Ernteplan</p>
+</header>
 
-  <section class="harvest">
-    <h2>🧺 Jetzt ernten</h2>
-    <ul id="harvest-list"></ul>
-  </section>
+<section class="garden-grid">
+    <div class="beet-card">
+        <div class="beet-header">Beet 1: Starkzehrer</div>
+        <div class="beet-content">
+            <div class="plot">🍅 Tomaten</div>
+            <div class="plot">🌿 Basilikum</div>
+            <div class="plot">🥒 Gurken</div>
+            <div class="plot">🌶️ Paprika</div>
+        </div>
+    </div>
 
-<section class="map">
-  <h2>🗺️ Gartenübersicht</h2>
-  <div id="garden-map"></div>
+    <div class="beet-card">
+        <div class="beet-header">Beet 2: Mittelzehrer</div>
+        <div class="beet-content">
+            <div class="plot">🥕 Möhren</div>
+            <div class="plot">🧅 Zwiebeln</div>
+            <div class="plot">🥬 Kopfsalat</div>
+            <div class="plot">🥬 Rote Bete</div>
+        </div>
+    </div>
+
+    <div class="beet-card">
+        <div class="beet-header">Beet 3: Schwachzehrer</div>
+        <div class="beet-content">
+            <div class="plot">🫛 Erbsen</div>
+            <div class="plot">🥗 Feldsalat</div>
+            <div class="plot">Radieschen</div>
+            <div class="plot">Bohnen</div>
+        </div>
+    </div>
+
+    <div class="beet-card">
+        <div class="beet-header">Beet 4: Beeren & Mehrjähriges</div>
+        <div class="beet-content">
+            <div class="plot">🍓 Erdbeeren</div>
+            <div class="plot">🍓 Erdbeeren</div>
+            <div class="plot">🌱 Rhabarber</div>
+            <div class="plot">🌿 Kräuter</div>
+        </div>
+    </div>
 </section>
-  
-  <section class="beds">
-    <h2>🪴 Beete</h2>
-    <div id="beds-container"></div>
-  </section>
 
-  <script src="data.js"></script>
+<section class="harvest-list">
+    <h2>📋 Aktuelle Ernte-Checkliste</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Gemüse</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tomaten</td>
+                <td class="status-wait">⏳ Reift noch</td>
+            </tr>
+            <tr>
+                <td>Gurken</td>
+                <td class="status-ready">✅ Erntebereit</td>
+            </tr>
+            <tr>
+                <td>Salat</td>
+                <td class="status-ready">✅ Erntebereit</td>
+            </tr>
+            <tr>
+                <td>Radieschen</td>
+                <td class="status-none">❌ Abgeerntet</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
 </body>
 </html>
