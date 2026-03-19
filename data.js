@@ -53,3 +53,32 @@ beds.forEach(bed => {
   div.appendChild(list);
   bedsContainer.appendChild(div);
 });
+
+// VISUAL MAP
+const gardenMap = document.getElementById("garden-map");
+
+beds.forEach(bed => {
+  const bedDiv = document.createElement("div");
+  bedDiv.className = "bed-visual";
+
+  const title = document.createElement("h4");
+  title.textContent = bed.name;
+
+  bedDiv.appendChild(title);
+
+  bed.plants.forEach(plant => {
+    const plantDiv = document.createElement("div");
+    plantDiv.className = "plant";
+    plantDiv.textContent = plant;
+
+    // Highlight wenn erntereif
+    if (harvestNow.some(h => plant.includes(h.split(" ")[0]))) {
+      plantDiv.style.background = "#d9ead3";
+      plantDiv.style.fontWeight = "bold";
+    }
+
+    bedDiv.appendChild(plantDiv);
+  });
+
+  gardenMap.appendChild(bedDiv);
+});
