@@ -9,7 +9,7 @@
             --primary-green: #4CAF50;
             --dark-green: #2E7D32;
             --earth-brown: #5D4037;
-            --field-bg: #8D6E63; /* Erdboden-Farbe */
+            --field-bg: #8D6E63; 
             --text-light: #ffffff;
             --bg-color: #f1f8e9;
         }
@@ -26,7 +26,6 @@
 
         h1 { color: var(--dark-green); margin-bottom: 30px; }
 
-        /* Container für alle Beete */
         .garden-container {
             display: flex;
             flex-wrap: wrap;
@@ -36,12 +35,11 @@
             max-width: 1200px;
         }
 
-        /* Das einzelne Beet (schmal und lang) */
         .beet {
             background: var(--earth-brown);
             border: 4px solid #3e2723;
             border-radius: 10px;
-            width: 220px; /* Schmalere, längliche Form */
+            width: 220px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
@@ -54,16 +52,14 @@
             border-bottom: 2px solid #3e2723;
         }
 
-        /* Das Pflanzen-Raster innerhalb eines Beets */
         .plot-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 Spalten pro Beet */
-            grid-auto-rows: 60px; /* Eine Standard-Einheit Höhe */
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: 60px;
             gap: 4px;
             padding: 8px;
         }
 
-        /* Basis-Stil für eine Pflanze */
         .plant {
             background: #a1887f;
             border-radius: 4px;
@@ -81,16 +77,25 @@
 
         .plant:hover { transform: scale(1.02); background: #b1948a; }
 
-        /* Proportionen: Hier steuern wir die Größe */
-        .big { grid-row: span 3; background: #689F38; } /* Große Fläche (z.B. Tomaten) */
-        .medium { grid-row: span 2; background: #8BC34A; } /* Mittlere Fläche */
-        .wide { grid-column: span 2; } /* Geht über die ganze Breite des Beets */
+        .big { grid-row: span 3; background: #689F38; }
+        .medium { grid-row: span 2; background: #8BC34A; }
+        .wide { grid-column: span 2; }
 
-        /* Ernteliste Styling */
-        .harvest-section {
-            margin-top: 50px;
+        /* --- NEU: Container für das Nebeneinander-Layout --- */
+        .info-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
             width: 100%;
-            max-width: 600px;
+            max-width: 1200px;
+            margin-top: 50px;
+        }
+
+        .harvest-section {
+            flex: 1;
+            min-width: 300px;
+            max-width: 590px;
             background: white;
             padding: 20px;
             border-radius: 15px;
@@ -100,6 +105,16 @@
         table { width: 100%; border-collapse: collapse; }
         td, th { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
         .ready { color: var(--primary-green); font-weight: bold; }
+        
+        /* Monat-Balken Style (Optional für die Übersicht) */
+        .period-tag {
+            background: #e8f5e9;
+            color: var(--dark-green);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -107,7 +122,6 @@
 <h1>🌿 Villa Massimo - Gemüsegarten 🌿</h1>
 
 <div class="garden-container">
-    
     <div class="beet">
         <div class="beet-title">Beet 1</div>
         <div class="plot-grid">
@@ -147,18 +161,33 @@
             <div class="plant wide">🌱 Rhabarber</div>
         </div>
     </div>
-
 </div>
 
-<section class="harvest-section">
-    <h2>📋 Was kann ich heute ernten?</h2>
-    <table>
-        <tr><th>Gemüse</th><th>Status</th></tr>
-        <tr><td>Gurken</td><td class="ready">✅ Erntebereit</td></tr>
-        <tr><td>Basilikum</td><td class="ready">✅ Erntebereit</td></tr>
-        <tr><td>Tomaten</td><td>⏳ Bald soweit</td></tr>
-    </table>
-</section>
+<div class="info-wrapper">
+
+    <section class="harvest-section">
+        <h2>📅 Ernteperioden (Übersicht)</h2>
+        <table>
+            <tr><th>Gemüse</th><th>Monate</th></tr>
+            <tr><td>Salate</td><td><span class="period-tag">Mai - Okt</span></td></tr>
+            <tr><td>Tomaten</td><td><span class="period-tag">Juli - Okt</span></td></tr>
+            <tr><td>Gurken</td><td><span class="period-tag">Juli - Sept</span></td></tr>
+            <tr><td>Erdbeeren</td><td><span class="period-tag">Juni - Juli</span></td></tr>
+            <tr><td>Wurzelgemüse</td><td><span class="period-tag">Aug - Nov</span></td></tr>
+        </table>
+    </section>
+
+    <section class="harvest-section">
+        <h2>📋 Was kann ich heute ernten?</h2>
+        <table>
+            <tr><th>Gemüse</th><th>Status</th></tr>
+            <tr><td>Gurken</td><td class="ready">✅ Erntebereit</td></tr>
+            <tr><td>Basilikum</td><td class="ready">✅ Erntebereit</td></tr>
+            <tr><td>Tomaten</td><td>⏳ Bald soweit</td></tr>
+        </table>
+    </section>
+
+</div>
 
 </body>
 </html>
