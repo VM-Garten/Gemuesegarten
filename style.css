@@ -1,6 +1,6 @@
 h1 { 
     color: var(--dark-green); 
     margin-bottom: 30px; 
-    text-align: center; /* Erzwingt die Zentrierung des Textes */
-    width: 100%;        /* Nutzt die volle Breite, damit 'center' greift */
+    text-align: center;
+    width: 100%;
 }
